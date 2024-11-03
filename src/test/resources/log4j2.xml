@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="WARN">
+
+ <!--./ represents the current project location and logs is the folder where we want to maintain the logs -->
+<Properties>
+         <!--In xml If you want to define a varibale use Property tag  -->
+         <Property name="basePath">./logs/</Property> 
+</Properties>
+
+  <!-- Appenders part -->
+  <Appenders>
+     <!-- for console window -->
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    </Console> 
+     
+     <!-- for file -->
+    <RollingFile name="File" fileName="${basePath}/automation.log" filePattern="${basePath}/automation-%d{yyyy-MM-dd}.log">
+           <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    <!-- size="5000" represents the size of the file, and if the file size is exceeded , it will take a backup and create a new file-->
+            <SizeBasedTriggeringPolicy size="5000" />
+     </RollingFile>     
+  </Appenders>
+  
+  
+     <!-- Loggers part -->
+  <Loggers>
+      <Root level="Info"> 
+      
+      <!-- <AppenderRef ref="Console"/> -->
+      
+      <AppenderRef ref="File"/>
+
+      </Root>
+  </Loggers>
+  
+</Configuration>
